@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang = "en" >
+
+<head >
+    <meta charset = "UTF-8" >
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport" >
+    <meta content = "ie=edge" http-equiv = "X-UA-Compatible" >
+    <title >weatherly</title >
+    <link crossorigin = "anonymous"
+          href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity = "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          rel = "stylesheet" >
+    
+    <link href = "https://fonts.googleapis.com/css?family=Lobster|Nixie+One&display=swap" rel = "stylesheet" >
+    
+    <script crossorigin = "anonymous"
+            integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            src = "https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script >
+    <script crossorigin = "anonymous"
+            integrity = "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script >
+    <script crossorigin = "anonymous"
+            integrity = "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script >
+    
+    
+    <style rel = "stylesheet" >
+        body {background:#ccc}
+        
+        
+        /*==================================================
+         * Effect 8
+         * ===============================================*/
+        .effect8
+        {
+            position:relative;
+            -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+               -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+                    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+        .effect8:before, .effect8:after
+        {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+            top:10px;
+            bottom:10px;
+            left:0;
+            right:0;
+            -moz-border-radius:100px / 10px;
+            border-radius:100px / 10px;
+        }
+        .effect8:after
+        {
+            right:10px;
+            left:auto;
+            -webkit-transform:skew(8deg) rotate(3deg);
+               -moz-transform:skew(8deg) rotate(3deg);
+                -ms-transform:skew(8deg) rotate(3deg);
+                 -o-transform:skew(8deg) rotate(3deg);
+                    transform:skew(8deg) rotate(3deg);
+        }
+    
+    /*==================================================
+     * Effect 4
+     * ===============================================*/
+    .effect4
+    {
+      position: relative;
+    }
+    .effect4:after
+    {
+      z-index: -1;
+      position: absolute;
+      content: "";
+      bottom: 15px;
+      right: 10px;
+      left: auto;
+      width: 50%;
+      top: 80%;
+      max-width:300px;
+      background: #777;
+      -webkit-box-shadow: 0 15px 10px #777;
+      -moz-box-shadow: 0 15px 10px #777;
+      box-shadow: 0 15px 10px #777;
+      -webkit-transform: rotate(3deg);
+      -moz-transform: rotate(3deg);
+      -o-transform: rotate(3deg);
+      -ms-transform: rotate(3deg);
+      transform: rotate(3deg);
+    }
+    
+    #box{
+        float:left;
+    }
+    
+    #org-name{
+        font-family: 'Nixie One', cursive;
+        //font-family: 'Lobster', cursive;
+    }
+
+    #header{
+        border-radius:0px;
+        margin-bottom:50px;
+        padding:50px;
+    }
+    
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding:10px;
+        display: block;
+        background-color: #f5f5f5;
+    }
+    
+    .container2{
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+    
+    
+    
+    
+    </style >
+
+</head >
+
+<body >
+    <header class = "header" >
+        <div class = "jumbotron text-center" id = "header" >
+            <div class = "container-fluid bg-1" >
+                <h1 class = "title" id = "org-name" >
+                    weatherly
+                </h1 >
+            </div >
+        </div >
+    </header >
+    <div id = "page-content" >
+        <section class = "section" >
+            <div class = "container" >
+                <div class = "row justify-content-md-center" >
+                    <div class = "col-12 col-md-6" >
+                        <form method = "POST" >
+                            <div class = "form-group" >
+                                <div class = "input-group mb-3" >
+                                    <input class = "form-control" name = "city"
+                                           placeholder = "City Name" type = "text" >
+                                    <div class = "input-group-append" >
+                                        <button class = "btn btn-dark" id = "add_city" >
+                                            Add City
+                                        </button >
+                                    
+                                    </div >
+                                
+                                </div >
+                            </div >
+                        </form >
+                        {% if flag == 1 %}
+                        <div class = "alert alert-danger alert-dismissible" >
+                            <button class = "close" data-dismiss = "alert" type = "button" >&times;</button >
+                            City Doesn't Exist...
+                        </div >
+                        {% endif %}
+                    </div >
+                </div >
+            </div >
+        </section >
+        <section class = "section" >
+            <div class = "container  pt-5 justify-content-md-center" >
+                
+                {% for weather in weather_data %}
+                <div class = "col-12 col-md-3 p-3 bg-white mr-md-5 mb-4 rounded effect4" id = "box" >
+                    
+                    <article class = "media" >
+                        <div class = "media-left" >
+                            <figure class = "figure" >
+                                <img alt = "Image" class = "figure-img img-fluid rounded"
+                                     src = "http://openweathermap.org/img/w/{{ weather.icon }}.png" >
+                            </figure >
+                        </div >
+                        <div class = "media-content" >
+                            <div class = "content" >
+                                <p >
+                                    <span class = "title" >{{ weather.city }}</span >
+                                    <br >
+                                    <span class = "subtitle" >{{ weather.temperature }}° C</span >
+                                    <br > {{ weather.description }}
+                                </p >
+                            </div >
+                        </div >
+                    </article >
+                </div >
+                
+                {% endfor %}
+            </div >
+        </section >
+    </div >
+    <!--<footer class = "footer"  >-->
+    <!--<div class = "container2 text-center" >-->
+    <!--<span class="text-muted">Copyright &copy; Your Website</span >-->
+    <!--</div >-->
+    <!--</footer >-->
+</body >
+
+</html >

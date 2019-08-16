@@ -1,0 +1,63 @@
+Flask Installation:-->
+
+--> Install Flask: pip install Flask
+
+--> Flask Guide: https://pypi.org/project/Flask/
+
+
+sqlAlchemy:-->
+
+--> Install SQLAlchemy for Flask: pip install flask-sqlaclchemy
+
+--> sqlAlchemy Documentation: https://www.tutorialspoint.com/flask/flask_sqlalchemy
+
+
+requests:-->
+
+--> Install requests package: pip install requests
+
+--> requests Documentation: https://pypi.org/project/requests/
+
+Steps:
+1)  You have index.html template ready.
+2)  Create an app.py file.
+3)  import requests
+4)  from flask import Flask
+5)  from flask_sqlalchemy import SQLAlchemy
+6)  create an INSTANCE of Flask Class
+7)  create @app.route() decorater
+
+********************************* [VIMP] *********************************
+
+    and define a function for routing to desired template
+    this function can return a string or a html template using
+    render_template('template_name.html') of
+    JINJA2 Templating Engine.
+    JINJA2 templating engine returns the html page but along with
+    html template, we can pass certain parameters.
+    these parameters can be used in the template using certain delimeters
+    such as {{ }}, {% %}
+
+    BUT TO RENDER THAT TEMPLATE WITHOUT ANY ERRORS YOU MUST PUT ALL
+    THE TEMPLATES IN THE  --> "templates" <-- FOLDER
+
+
+
+9)  Export Flask app by using set keyword on Windows
+    and export keyword in linux or mac.
+
+10)  in app.py file write app.config['DEBUG'] = True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
