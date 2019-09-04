@@ -22,10 +22,17 @@
     <script crossorigin = "anonymous"
             integrity = "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script >
-    
+    <!---->
+    <!--<link href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel = "stylesheet" >-->
     
     <style rel = "stylesheet" >
         body {background:#ccc}
+        
+        html,body{
+            height:100%;
+        }
+        
+
         
         
         /*==================================================
@@ -92,11 +99,7 @@
       -ms-transform: rotate(3deg);
       transform: rotate(3deg);
     }
-    
-    #box{
-        float:left;
-    }
-    
+   
     #org-name{
         font-family: 'Nixie One', cursive;
         //font-family: 'Lobster', cursive;
@@ -108,20 +111,60 @@
         padding:50px;
     }
     
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding:10px;
-        display: block;
-        background-color: #f5f5f5;
-    }
-    
+
     .container2{
         width: auto;
         max-width: 680px;
         padding: 0 15px;
     }
+    
+
+    
+    #boxhead{
+        box-radius:0px;
+    }
+    
+
+    
+    textarea:focus,
+    textarea.form-control:focus,
+    input.form-control:focus,
+    input[type=text]:focus,
+    input[type=password]:focus,
+    input[type=email]:focus,
+    input[type=number]:focus,
+    button.btn:focus,
+    [type=text].form-control:focus,
+    [type=password].form-control:focus,
+    [type=email].form-control:focus,
+    [type=tel].form-control:focus,
+    [contenteditable].form-control:focus {
+      box-shadow: inset 0 0px 0 #ddd;
+    }
+    
+    #main-container{
+        min-height:100%;
+    }
+    
+    #main{
+        overflow:auto;
+        padding-bottom:50px;
+    }
+
+    /* Footer */
+    .footer{
+        position:relative;
+        bottom:0px;
+        left:0px;
+        background:#343a40;
+        height:auto;
+        width:100%;
+    }
+
+ 
+
+    
+    
     
     
     
@@ -131,17 +174,18 @@
 </head >
 
 <body >
-    <header class = "header" >
-        <div class = "jumbotron text-center" id = "header" >
-            <div class = "container-fluid bg-1" >
-                <h1 class = "title" id = "org-name" >
-                    weatherly
-                </h1 >
+    <div id = "main-container" >
+        <header class = "header" >
+            <div class = "jumbotron text-center" id = "header" >
+                <div class = "container-fluid bg-1" >
+                    <h1 class = "title" id = "org-name" >
+                        weatherly
+                    </h1 >
+                </div >
             </div >
-        </div >
-    </header >
-    <div id = "page-content" >
-        <section class = "section" >
+        </header >
+        
+        <div id = "main" >
             <div class = "container" >
                 <div class = "row justify-content-md-center" >
                     <div class = "col-12 col-md-6" >
@@ -160,51 +204,122 @@
                                 </div >
                             </div >
                         </form >
-                        {% if flag == 1 %}
-                        <div class = "alert alert-danger alert-dismissible" >
-                            <button class = "close" data-dismiss = "alert" type = "button" >&times;</button >
-                            City Doesn't Exist...
+                        {% with messages = get_flashed_messages(with_categories = true) %}
+                        
+                        {% if messages %}
+                        
+                        {% for category,message in messages %}
+                        <div class = "alert alert-{{category}} alert-dismissible fade show" role = "alert" >
+                            {{ message }}
+                            <button aria-label = "Close" class = "close" data-dismiss = "alert" type = "button" >
+                                <span aria-hidden = "true" >&times;</span >
+                            </button >
                         </div >
+                        {% endfor %}
+                        
                         {% endif %}
+                        
+                        {% endwith %}
                     </div >
                 </div >
             </div >
-        </section >
-        <section class = "section" >
-            <div class = "container  pt-5 justify-content-md-center" >
+            <div class = "col-12" id = "new" >
                 
-                {% for weather in weather_data %}
-                <div class = "col-12 col-md-3 p-3 bg-white mr-md-5 mb-4 rounded effect4" id = "box" >
-                    
-                    <article class = "media" >
-                        <div class = "media-left" >
-                            <figure class = "figure" >
-                                <img alt = "Image" class = "figure-img img-fluid rounded"
-                                     src = "http://openweathermap.org/img/w/{{ weather.icon }}.png" >
-                            </figure >
-                        </div >
-                        <div class = "media-content" >
-                            <div class = "content" >
-                                <p >
-                                    <span class = "title" >{{ weather.city }}</span >
-                                    <br >
-                                    <span class = "subtitle" >{{ weather.temperature }}° C</span >
-                                    <br > {{ weather.description }}
-                                </p >
-                            </div >
-                        </div >
-                    </article >
+                
+                {% if not weather_data %}
+                
+                <div class = "col-md-4 mt-5 mx-auto" >
+                    <h4 style = "text-align:center" >Add a City in Database !</h4 >
+                    <img alt = "Empty Box Image"
+                         src = "https://media.giphy.com/media/3ohhwsjzpejaSWoTkI/giphy.gif"
+                         width = "100%" >
                 </div >
                 
-                {% endfor %}
+                
+                {% endif %}
+                
+                
+                <div class = "mt-5 d-flex justify-content-center align-content-around flex-wrap" >
+                    
+                    {% for weather in weather_data %}
+                    
+                    
+                    <div class = "col-12 col-md-3 bg-white p-0 mr-md-5 mb-4 mb-md-5 rounded effect4"
+                         id = "box" >
+                        
+                        <div class = "alert-warning rounded-top pt-2 pb-2 pl-3 pr-3" role = "alert" >
+                            <strong class = "font-weight-light" style = "font-size:20px;" >{{ weather.city }}</strong >
+                            <a href = "{{ url_for('delete_city', name = weather.city ) }}" >
+                                <button aria-label = "Close" class = "close" type = "button" >
+                                    <span aria-hidden = "true" style = "font-size:20px;" >&times</span >
+                                </button >
+                            </a >
+                        </div >
+                        
+                        <div class = "pl-3 pr-3 pt-2 pb-0 d-flex justify-content-between" >
+                            
+                            <div class = "p-0" >
+                                
+                                <figure class = "p-0" >
+                                    <img alt = "Image" class = "figure-img img-fluid"
+                                         src = "/static/weather/{{weather.icon}}.png"
+                                         style = "width:55px;height:55px;border:0;" >
+                                </figure >
+                                
+                                
+                                <p >{{ weather.description }}</p >
+                            </div >
+                            
+                            <div class = "p-0" >
+                                
+                                <div class = "p-0" ><h1 style = "font-size:50px" >{{ weather.temperature }}°</h1 >
+                                </div >
+                                <div class = "p-0 h-auto" >
+                                    <p class = "small text-dark p-0 m-0" >Humidity: {{ weather.humidity}}</p >
+                                    <p class = "small text-dark p-0 m-0" >Wind Speed: {{ weather.wind}}</p >
+                                </div >
+                            </div >
+                        
+                        </div >
+                    
+                    
+                    </div >
+                    
+                    
+                    {% endfor %}
+                </div >
             </div >
-        </section >
+        </div >
     </div >
-    <!--<footer class = "footer"  >-->
-    <!--<div class = "container2 text-center" >-->
-    <!--<span class="text-muted">Copyright &copy; Your Website</span >-->
-    <!--</div >-->
-    <!--</footer >-->
+    
+    <div class = "footer" >
+        
+        <div class = "py-0 d-flex flex-md-row justify-content-around flex-column" >
+            <div class = "mb-0 pb-0" >
+                <p class = "text-light small text-center p-2 mb-0" >Icon Designer: Laura Reen
+                    <a class = "text-warning" href = "https://www.iconfinder.com/laurareen" >
+                        (https://www.iconfinder.com/laurareen)
+                    </a >
+                </p >
+            </div >
+            <div class = "mb-0 pb-0" >
+                <p class = "text-light small text-center p-2 mb-0" >Made with
+                    <a class = "text-warning" href = "https://openweathermap.org/api" >
+                        (https://openweathermap.org/api)
+                    </a >
+                </p >
+            </div >
+        
+        </div >
+        
+        <hr color = "grey" style = "margin:0 auto;" width = "90%" >
+        
+        <div class = "mb-0 pb-1" >
+            <p class = "text-light small text-center p-2"
+               style = "padding-bottom:0px;margin-bottom:0px" >&copy; weatherly | Designed by Nilesh Unde </p >
+        </div >
+    
+    </div >
 </body >
 
 </html >
