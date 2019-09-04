@@ -9,7 +9,6 @@ SQLite is used for database and Flask for backend and Jinja2 template rendering 
 <br>
 <br>
 Screenshot:
-<br>
-<br>
+
 ![](static/screenshots/weatherly.png)
 
